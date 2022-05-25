@@ -1,0 +1,776 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "Tab",
+            "id": "interface-Tab-fe32335c2f27a4d85b2835d91c2bde94879517357799e35941d573af878e23f4be32e972b588762d75fa303869e09cc3f70744b2e5223283c5d8355f3e365fe3",
+            "file": "src/app/components/tab.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input, OnInit} from \"@angular/core\"\r\n\r\nexport interface Tab{\r\n    tabsData: {tabName:string; tabText:string}[]\r\n    currentTab: number\r\n}\r\n\r\n@Component({\r\n    selector: \"app-tab\",\r\n    template:`\r\n    <app-tabitens\r\n    [tabNames] = tabsNames\r\n    [tabTexts] = tabsTexts\r\n    [currentTab] = currentTab\r\n    (onSelection)=\"select($event)\"\r\n    ></app-tabitens>\r\n    `\r\n})\r\n\r\nexport class TabComponent implements OnInit{\r\n    @Input() tabsData!: { tabName: string; tabText: string; }[]\r\n    currentTab: number = 0\r\n    tabsNames: string[] = []\r\n    tabsTexts: string[] = []\r\n    ngOnInit(): void {\r\n          this.tabsNames = this.tabsData.map((tab) => tab.tabName)\r\n          this.tabsTexts = this.tabsData.map((tab) => tab.tabText)\r\n    }\r\n\r\n\r\n    select(tabIndex: number){\r\n        this.currentTab = tabIndex\r\n    }\r\n    \r\n}",
+            "properties": [
+                {
+                    "name": "currentTab",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "tabsData",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "TabItens",
+            "id": "interface-TabItens-989feaf8b5e217ef28503fc60001908d4f90b9b633edcdb36a91eb7817b4b2cddf66292e7949ed895a4d9c7d93ff47e9765d9fa81f7cf730f474f71a744f60ba",
+            "file": "src/app/components/tabItens.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, EventEmitter, Inject, Input, OnInit, Output } from \"@angular/core\"\r\n\r\nexport interface TabItens{\r\n  tabNames: string[]\r\n  tabTexts: string[]\r\n  currentTab: number\r\n}\r\n\r\n@Component({\r\n    selector: 'app-tabitens',\r\n    template:`\r\n    <div>\r\n        <button *ngFor=\"let tabName of tabNamess; let i = index\"\r\n            [ngClass]=\"{selected: i === currentTab}\"\r\n            (click)=\"onSelection.emit(i)\">\r\n            {{tabName}}\r\n        </button>\r\n    </div >\r\n    <div class=\"text\">\r\n        <h2> {{tabTextss[currentTab]}} </h2>\r\n    </div>\r\n    `,\r\n    styles: [`\r\n    .tab h2 {\r\n  font-weight: normal;\r\n  font-size: 20pt;\r\n  margin-top: 0;\r\n}\r\n\r\nbutton {\r\n  \r\n  margin-left:10px;\r\n  background-color: #ccc;\r\n  border: 1px solid rgb(118, 118, 118);\r\n  border-radius: 5px;\r\n  padding: 2px 5px;\r\n  font-size: 15pt;\r\n  align-items: center;\r\n}\r\n\r\n.selected {\r\n  font-weight: bold;\r\n  background-color: #aaa;\r\n}\r\n\r\n\r\n.text{\r\n  background-color: #ccc;\r\n  font-weight: normal;\r\n  font-size: 12pt;\r\n  text-align: left;\r\n  margin-top: 15px;\r\n  margin-left: 15px;\r\n  width:200pt;\r\n  height: 100pt;\r\n  border-radius: 10px;\r\n  color:black\r\n}\r\n  `]\r\n})\r\nexport class TabItensComponent implements OnInit{\r\n    @Input() tabNames!: string[]\r\n    @Input() tabTexts!: string[]\r\n    @Input() currentTab!: number\r\n    @Output() onSelection = new EventEmitter<number>()\r\n\r\n    tabNamess:string[] =[]\r\n    tabTextss:string[] =[]\r\n\r\n    ngOnInit(): void {\r\n        this.tabNamess = this.tabNames\r\n        this.tabTextss = this.tabTexts\r\n    }\r\n}",
+            "properties": [
+                {
+                    "name": "currentTab",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "tabNames",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "tabTexts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        }
+    ],
+    "injectables": [],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-20003c0ce5a702dd4d9caed9fb84435d24340b80340b84698ea1d1d95fd0b6a09769b99bd98e25cc8ee479bce58e2ab3d26b6d5513ae3e05bc589bba6b807fde",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<app-tab  [tabsData]=tabsData\n    ></app-tab>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "tabsData",
+                    "defaultValue": "[{\n    tabName: 'Tb 1',\n    tabText: 'Texto do primeiro tab'\n  },\n  {\n    tabName: 'Tb 2',\n    tabText: 'Texto do segundo tab'\n  },\n  {\n    tabName: 'Tb 3',\n    tabText: 'Texto do terceiro tab'\n  },\n  {\n    tabName: 'Tb 4',\n    tabText: 'Texto do quarto tab'\n  }]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "'tab-angular'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  template: `<app-tab\n  [tabsData]=tabsData\n    ></app-tab>`\n})\n\nexport class AppComponent {\n  title = 'tab-angular';\n  tabsData = [{\n    tabName: 'Tb 1',\n    tabText: 'Texto do primeiro tab'\n  },\n  {\n    tabName: 'Tb 2',\n    tabText: 'Texto do segundo tab'\n  },\n  {\n    tabName: 'Tb 3',\n    tabText: 'Texto do terceiro tab'\n  },\n  {\n    tabName: 'Tb 4',\n    tabText: 'Texto do quarto tab'\n  }]\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": ""
+        },
+        {
+            "name": "TabComponent",
+            "id": "component-TabComponent-fe32335c2f27a4d85b2835d91c2bde94879517357799e35941d573af878e23f4be32e972b588762d75fa303869e09cc3f70744b2e5223283c5d8355f3e365fe3",
+            "file": "src/app/components/tab.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-tab",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<app-tabitens\n[tabNames] = tabsNames\n[tabTexts] = tabsTexts\n[currentTab] = currentTab\n(onSelection)=\"select($event)\"\n></app-tabitens>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "tabsData",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "literal type[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "currentTab",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "tabsNames",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "tabsTexts",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 24
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "select",
+                    "args": [
+                        {
+                            "name": "tabIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "tabIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnInit} from \"@angular/core\"\r\n\r\nexport interface Tab{\r\n    tabsData: {tabName:string; tabText:string}[]\r\n    currentTab: number\r\n}\r\n\r\n@Component({\r\n    selector: \"app-tab\",\r\n    template:`\r\n    <app-tabitens\r\n    [tabNames] = tabsNames\r\n    [tabTexts] = tabsTexts\r\n    [currentTab] = currentTab\r\n    (onSelection)=\"select($event)\"\r\n    ></app-tabitens>\r\n    `\r\n})\r\n\r\nexport class TabComponent implements OnInit{\r\n    @Input() tabsData!: { tabName: string; tabText: string; }[]\r\n    currentTab: number = 0\r\n    tabsNames: string[] = []\r\n    tabsTexts: string[] = []\r\n    ngOnInit(): void {\r\n          this.tabsNames = this.tabsData.map((tab) => tab.tabName)\r\n          this.tabsTexts = this.tabsData.map((tab) => tab.tabText)\r\n    }\r\n\r\n\r\n    select(tabIndex: number){\r\n        this.currentTab = tabIndex\r\n    }\r\n    \r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ]
+        },
+        {
+            "name": "TabItensComponent",
+            "id": "component-TabItensComponent-989feaf8b5e217ef28503fc60001908d4f90b9b633edcdb36a91eb7817b4b2cddf66292e7949ed895a4d9c7d93ff47e9765d9fa81f7cf730f474f71a744f60ba",
+            "file": "src/app/components/tabItens.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-tabitens",
+            "styleUrls": [],
+            "styles": [
+                "\n    .tab h2 {\n  font-weight: normal;\n  font-size: 20pt;\n  margin-top: 0;\n}\n\nbutton {\n  \n  margin-left:10px;\n  background-color: #ccc;\n  border: 1px solid rgb(118, 118, 118);\n  border-radius: 5px;\n  padding: 2px 5px;\n  font-size: 15pt;\n  align-items: center;\n}\n\n.selected {\n  font-weight: bold;\n  background-color: #aaa;\n}\n\n\n.text{\n  background-color: #ccc;\n  font-weight: normal;\n  font-size: 12pt;\n  text-align: left;\n  margin-top: 15px;\n  margin-left: 15px;\n  width:200pt;\n  height: 100pt;\n  border-radius: 10px;\n  color:black\n}\n  "
+            ],
+            "template": "<div>\n    <button *ngFor=\"let tabName of tabNamess; let i = index\"\n        [ngClass]=\"{selected: i === currentTab}\"\n        (click)=\"onSelection.emit(i)\">\n        {{tabName}}\n    </button>\n</div >\n<div class=\"text\">\n    <h2> {{tabTextss[currentTab]}} </h2>\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "currentTab",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 64,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "tabNames",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 62,
+                    "type": "string[]",
+                    "decorators": []
+                },
+                {
+                    "name": "tabTexts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 63,
+                    "type": "string[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onSelection",
+                    "defaultValue": "new EventEmitter<number>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 65,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "tabNamess",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 67
+                },
+                {
+                    "name": "tabTextss",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 68
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 70,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Inject, Input, OnInit, Output } from \"@angular/core\"\r\n\r\nexport interface TabItens{\r\n  tabNames: string[]\r\n  tabTexts: string[]\r\n  currentTab: number\r\n}\r\n\r\n@Component({\r\n    selector: 'app-tabitens',\r\n    template:`\r\n    <div>\r\n        <button *ngFor=\"let tabName of tabNamess; let i = index\"\r\n            [ngClass]=\"{selected: i === currentTab}\"\r\n            (click)=\"onSelection.emit(i)\">\r\n            {{tabName}}\r\n        </button>\r\n    </div >\r\n    <div class=\"text\">\r\n        <h2> {{tabTextss[currentTab]}} </h2>\r\n    </div>\r\n    `,\r\n    styles: [`\r\n    .tab h2 {\r\n  font-weight: normal;\r\n  font-size: 20pt;\r\n  margin-top: 0;\r\n}\r\n\r\nbutton {\r\n  \r\n  margin-left:10px;\r\n  background-color: #ccc;\r\n  border: 1px solid rgb(118, 118, 118);\r\n  border-radius: 5px;\r\n  padding: 2px 5px;\r\n  font-size: 15pt;\r\n  align-items: center;\r\n}\r\n\r\n.selected {\r\n  font-weight: bold;\r\n  background-color: #aaa;\r\n}\r\n\r\n\r\n.text{\r\n  background-color: #ccc;\r\n  font-weight: normal;\r\n  font-size: 12pt;\r\n  text-align: left;\r\n  margin-top: 15px;\r\n  margin-left: 15px;\r\n  width:200pt;\r\n  height: 100pt;\r\n  border-radius: 10px;\r\n  color:black\r\n}\r\n  `]\r\n})\r\nexport class TabItensComponent implements OnInit{\r\n    @Input() tabNames!: string[]\r\n    @Input() tabTexts!: string[]\r\n    @Input() currentTab!: number\r\n    @Output() onSelection = new EventEmitter<number>()\r\n\r\n    tabNamess:string[] =[]\r\n    tabTextss:string[] =[]\r\n\r\n    ngOnInit(): void {\r\n        this.tabNamess = this.tabNames\r\n        this.tabTextss = this.tabTexts\r\n    }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "\n    .tab h2 {\n  font-weight: normal;\n  font-size: 20pt;\n  margin-top: 0;\n}\n\nbutton {\n  \n  margin-left:10px;\n  background-color: #ccc;\n  border: 1px solid rgb(118, 118, 118);\n  border-radius: 5px;\n  padding: 2px 5px;\n  font-size: 15pt;\n  align-items: center;\n}\n\n.selected {\n  font-weight: bold;\n  background-color: #aaa;\n}\n\n\n.text{\n  background-color: #ccc;\n  font-weight: normal;\n  font-size: 12pt;\n  text-align: left;\n  margin-top: 15px;\n  margin-left: 15px;\n  width:200pt;\n  height: 100pt;\n  border-radius: 10px;\n  color:black\n}\n  \n",
+            "implements": [
+                "OnInit"
+            ]
+        }
+    ],
+    "modules": [
+        {
+            "name": "AppModule",
+            "id": "module-AppModule-530fa9435cfc29c9c94539652eb4ef2d068618f590c2363f9e497b87de0be000abcf7f116b7568dce377a15b201e5a80d439fdd38b6f8d14eaa489e859662966",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\n\nimport { AppComponent } from './app.component';\nimport { TabItensComponent } from './components/tabItens.component';\nimport { TabComponent } from './components/tab.component';\n@NgModule({\n  declarations: [\n    AppComponent,\n    TabComponent,\n    TabItensComponent\n  ],\n  imports: [\n    BrowserModule,\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        },
+                        {
+                            "name": "TabComponent"
+                        },
+                        {
+                            "name": "TabItensComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "context",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/test.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: true\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: false\n}"
+            },
+            {
+                "name": "require",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/test.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "literal type"
+            },
+            {
+                "name": "Tab1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/tab.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Tab2",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/tab.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "TabItens1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/tabItens.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "TabItens2",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/tabItens.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/tab.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<TabComponent>",
+                "defaultValue": "(args: TabComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/tabItens.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<TabItensComponent>",
+                "defaultValue": "(args: TabItensComponent) => ({\n  props: args,\n})"
+            }
+        ],
+        "functions": [],
+        "typealiases": [],
+        "enumerations": [],
+        "groupedVariables": {
+            "src/test.ts": [
+                {
+                    "name": "context",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                },
+                {
+                    "name": "require",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type"
+                }
+            ],
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: true\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: false\n}"
+                }
+            ],
+            "src/stories/tab.stories.ts": [
+                {
+                    "name": "Tab1",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/tab.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Tab2",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/tab.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/tab.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<TabComponent>",
+                    "defaultValue": "(args: TabComponent) => ({\n  props: args,\n})"
+                }
+            ],
+            "src/stories/tabItens.stories.ts": [
+                {
+                    "name": "TabItens1",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/tabItens.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "TabItens2",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/tabItens.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/tabItens.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<TabItensComponent>",
+                    "defaultValue": "(args: TabItensComponent) => ({\n  props: args,\n})"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {}
+    },
+    "routes": [],
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/tab.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TabComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/tab.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Tab",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/tabItens.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TabItensComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/tabItens.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "TabItens",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.prod.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/tab.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Tab1",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/tab.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Tab2",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/tab.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/tabItens.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "TabItens1",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/tabItens.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "TabItens2",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/tabItens.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "context",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "require",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}
