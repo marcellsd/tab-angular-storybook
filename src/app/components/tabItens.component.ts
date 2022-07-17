@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from "@angular/core"
+import { TabServices } from "../services/tab.services"
 
 export interface TabItens{
   tabNames: string[]
@@ -10,14 +11,14 @@ export interface TabItens{
     selector: 'app-tabitens',
     template:`
     <div>
-        <button *ngFor="let tabName of tabNamess; let i = index"
+        <button *ngFor="let tabName of tabService.tabListNames; let i = index"
             [ngClass]="{selected: i === currentTab}"
             (click)="onSelection.emit(i)">
             {{tabName}}
         </button>
     </div >
     <div class="text">
-        <h2> {{tabTextss[currentTab]}} </h2>
+        <h2> {{tabService.tabListTexts[currentTab]}} </h2>
     </div>
     `,
     styles: [`
@@ -70,5 +71,8 @@ export class TabItensComponent implements OnInit{
     ngOnInit(): void {
         this.tabNamess = this.tabNames
         this.tabTextss = this.tabTexts
+    }
+    constructor(public tabService:TabServices){
+
     }
 }

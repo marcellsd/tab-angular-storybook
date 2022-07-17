@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output} from "@angular/core"
+import { TabServices } from "../services/tab.services";
 
 export interface Tab{
     tabsData: {tabName:string; tabText:string}[]
@@ -9,25 +10,20 @@ export interface Tab{
     selector: "app-tab",
     template:`
     <app-tabitens
-    [tabNames] = tabsNames
-    [tabTexts] = tabsTexts
+    [tabNames] = tabService.tabListNames
+    [tabTexts] = tabService.tabListTexts
     [currentTab] = currentTab
     (onSelection)="select($event)"
     ></app-tabitens>
     `
 })
 
-export class TabComponent implements OnInit{
-    @Input() tabsData!: { tabName: string; tabText: string; }[]
+export class TabComponent{
     currentTab: number = 0
     tabsDataa: {tabName:string; tabText:string}[] =[]
-    tabsNames: string[] = []
-    tabsTexts: string[] = []
-    ngOnInit(): void {
-          this.tabsNames = this.tabsData.map((tab) => tab.tabName)
-          this.tabsTexts = this.tabsData.map((tab) => tab.tabText)
-    }
+    constructor (public tabService: TabServices){
 
+    }
 
     select(tabIndex: number){
         this.currentTab = tabIndex
