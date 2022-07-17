@@ -2,10 +2,12 @@ import { Component, Input, Output, EventEmitter, ViewChild } from "@angular/core
 import { TabServices } from "../services/tab.services";
 
 
+
 @Component({
     selector: 'app-tab-form',
+    styleUrls: ['./tab-form.component.css'],
     template: `
-        <form #tabForm="ngForm" (ngSubmit)="tabForm.valid && submit()">
+        <form class='qst-form' #tabForm="ngForm" (ngSubmit)="tabForm.valid && submit()">
             
             <div>
                 <label>Número de tabs</label>
